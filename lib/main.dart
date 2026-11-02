@@ -86,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 // Screen 2
-// I am using a StatefulWidget because its content can change.
+// StatefulWidget because its content can change.
 
 class WidgetDemoScreen extends StatefulWidget {
   const WidgetDemoScreen({super.key});
@@ -133,9 +133,9 @@ class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
 
             // Changes the message when pressed.
 
-            OutlinedButton( // I used a different button widget
+            OutlinedButton( // I used a different button widget. can't see a difference
               onPressed: () {
-                setState(() {
+                setState(() { //It updates the data & tell Flutter to refresh the UI
                   message = 'Thank you for testing my app!';
                   buttonText = 'The End';        
                 });
