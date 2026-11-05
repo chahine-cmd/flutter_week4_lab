@@ -137,7 +137,7 @@ class WidgetDemoScreen extends StatefulWidget {
 
 class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
 
-   String message = 'Tap, Long Press, or Swipe the Square'; //stores the message displayed on the screen
+   String message = 'Tap the Square'; //stores the message displayed on the screen
    String gestureStatus = 'Waiting for gesture...'; //stores the most recent gesture detected = Variable
    String buttonText = 'Press Me';// Stores the button text
    Color squareColor = Colors.blue;
@@ -220,7 +220,7 @@ class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
                 setState(() {
                   gestureStatus = 'Swipe Detected';
                   message = 'Gesture Master Unlocked!';
-                  squareColor = Colors.purple;
+                  squareColor = Colors.teal;
                   squareText = 'Homepage';
                   isCircle = true;
                 });
