@@ -7,14 +7,14 @@ Users can perform tap, long press, and swipe gestures on an interactive shape, w
 
 # **Features**
 
-- Tap gesture detection
-- Long press gesture detection
-- Swipe gesture detection
+- Tap gesture detection using GestureDetector and onTap()
+- Long press gesture detection using GestureDetector and onLongPress()
+- Swipe gesture detection using GestureDetector and onHorizontalDragEnd()
 - Dynamic text updates using setState()
 - Status messages that provide gesture feedback
 - Dynamic color changes based on user interaction
-- shape transformation from square to circle
-- Navigation between multiple screens
+- Shape transformation from square to circle using BoxDecoration
+- Navigation between multiple screens using Navigator.push() and Navigator.pop()
 - Homepage return functionality
 
 # **Technologies Used**
