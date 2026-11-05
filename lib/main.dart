@@ -30,15 +30,40 @@ class WelcomeScreen extends StatelessWidget {
 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center, //It centers widgets vertically.
+          crossAxisAlignment: CrossAxisAlignment.center, //It centers widgets horizontally.
 
           children: [
+            
+RichText( //Uses RichText to display multiple styles in a single title.
+  textAlign: TextAlign.center,
+  text: TextSpan(
+    children: [
 
-            // In Week 2, this was my Hello World message.
-            // For Week 3, I changed it to the lab title.
+       TextSpan(
+        text: 'Week 4 Lab:\n',
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+ 
+      TextSpan(
+        text: 'Gesture-Controlled Interface',
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  ),
+),
 
+            /* //this command disable sections of code without deleting them.
             Text(
-              'Week 3 Lab: UI Design in Flutter',
+              'Week 4 Lab:', // I Changed the title
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -48,18 +73,31 @@ class WelcomeScreen extends StatelessWidget {
            
             SizedBox(height: 40), // Adds space below the title.
            
+                       Text(
+              'Gesture-Controlled Interface', // I Changed the title
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            
+            */
+
+            SizedBox(height: 40), // Adds space below the title.
+
             Text(
-              'Welcome to Flutter Widgets Lab',
+              'Welcome to Flutter Gestures Lab',
               style: TextStyle(
                 fontSize: 18,
-                color: Colors.red,
+                color: Colors.red
               ),
             ),
          
             SizedBox(height: 20),
            
             Icon(
-              Icons.science,
+              Icons.touch_app,
               size: 100,
               color: Colors.blue,
             ),
@@ -76,7 +114,7 @@ class WelcomeScreen extends StatelessWidget {
                 );
               },
 
-              child: const Text('Open Widget Demo'),
+              child: const Text('Open Gesture Demo'),
             ),
           ],
         ),
@@ -99,14 +137,18 @@ class WidgetDemoScreen extends StatefulWidget {
 
 class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
 
-   String message = 'Press the Button Below'; //stores the message displayed on the screen
+   String message = 'Tap, Long Press, or Swipe the Square'; //stores the message displayed on the screen
+   String gestureStatus = 'Waiting for gesture...'; //stores the most recent gesture detected = Variable
    String buttonText = 'Press Me';// Stores the button text
+   Color squareColor = Colors.blue;
+   String squareText = 'Touch Here';
+   bool isCircle = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Widget Demo',
+        title: const Text('Gesture Demo',
           style: TextStyle(
           color: Colors.blue,
           ),
@@ -129,11 +171,84 @@ class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
               textAlign: TextAlign.center,
             ),
 
-            const SizedBox(height: 100),
+            const SizedBox(height: 80), //space between status text & instruction text.
 
-            // Changes the message when pressed.
+            Text(
+              gestureStatus,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
 
-            OutlinedButton( // I used a different button widget. can't see a difference
+            
+            const SizedBox(height: 20), //space between text section and square.
+
+            GestureDetector( 
+              
+              //this is the code before I added return to Homepage button
+              /*onTap: () {
+                setState(() {
+                  gestureStatus = 'Tap Detected';
+                  message = 'Nice Tap! Try a Long Press Next';
+                  squareColor = Colors.green;
+                });
+              },*/
+
+              onTap: () {
+                if (squareText == 'Homepage') {
+                  Navigator.pop(context);
+                  return;
+                }
+                setState(() {
+                  gestureStatus = 'Tap Detected';
+                  message = 'Nice Tap! Try a Long Press Next';
+                  squareColor = Colors.green;
+                });
+              },
+
+              onLongPress: () {
+                setState(() {
+                  gestureStatus = 'Long Press Detected';
+                  message = 'Great! Now try Swiping';
+                  squareColor = Colors.orange;
+                });
+              },
+
+              onHorizontalDragEnd: (details) { //Swipe function
+                setState(() {
+                  gestureStatus = 'Swipe Detected';
+                  message = 'Gesture Master Unlocked!';
+                  squareColor = Colors.purple;
+                  squareText = 'Homepage';
+                  isCircle = true;
+                });
+              },
+
+              child: Container( //this is the square
+                width: 200,
+                height: 200,
+
+                decoration: BoxDecoration(
+                  color: squareColor,
+                  shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
+                ),
+              
+                child: Center(
+                  child: Text(
+                    squareText,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )
+                  )
+                )
+              )
+            )
+           
+            /* OutlinedButton( // Changes the message when pressed.
               onPressed: () {
                 setState(() { //It updates the data & tell Flutter to refresh the UI
                   message = 'Thank you for testing my app!';
@@ -142,7 +257,9 @@ class _WidgetDemoScreenState extends State<WidgetDemoScreen> {
               },
 
               child: Text(buttonText),
-            ),
+            ), */ //Week 3 button saved for reference.
+
+
           ],
         ),
       ),
